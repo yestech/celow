@@ -49,4 +49,8 @@
             <url>http://oss.sonatype.org/content/repositories/github-snapshots/</url>
         </snapshotRepository>
     </distributionManagement>
+  <modules>
+    <module>applet</module>
+    <module>core</module>
+  </modules>
 </project>
