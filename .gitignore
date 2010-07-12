@@ -1,0 +1,11 @@
+*~
+.DS_Store
+*.iml
+*.ipr
+*.iws
+*.pyc
+target/
+classpath
+.settings
+nb-configuration.xml
+catalog.xml

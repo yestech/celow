@@ -1,11 +1,8 @@
-<HTML>
-<HEAD>
-<TITLE>Celow Help</TITLE></HEAD>
-<BODY
-BACKGROUND="images/blurock.gif" TEXT="#FFFFFF" LINK="#69B4B4" VLINK="#69B4B4" ALINK="#F5E730" BGCOLOR="#000000">
-<P ALIGN="CENTER"><IMG
-SRC="images/celow.gif" ALT="CeLow" BORDER="0" WIDTH="400" HEIGHT="233"></P>
-<P><BR></P>
+{% extends "base.html" %}
+
+{% block title %}Celow Help{% endblock %}
+
+{% block content %}
 <center>
 <table bgcolor="#000000" border=4 cellspacing=0 cellpadding=0>
 <td width=600>
@@ -80,13 +77,5 @@ screen.</LI></UL></LI>
 </td>
 </table>
 </center>
-<hr width=45%>
-<center>
-<font face="Helvetica,Arial,Geneva" size="-1" >
-Bugs?...Comments?...Please e-mail: <A HREF="mailto:bugs@yestech.org?subject=celow">bugs@yestech.org</A></font>
-</center><hr width=45%>
-<!-- bottom link table -->
-<center><font face="Helvetica,Arial,Geneva" size="1">
-	This page is Copyright &#0169; 1999 - 2010 by <A HREF="http://yestech.org/">YES Technology Association</A>, 
-	All Rights Reserved<br /> &#0174; Trademarks are property of their respective companies.</center>
-</BODY></HTML>
+{% endblock %}
+

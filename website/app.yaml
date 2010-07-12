@@ -1,19 +1,11 @@
 application: cee-lo
-version: 1-1-0
+version: 1-2-1
 runtime: python
 api_version: 1
 
 handlers:
-- url: /favicon.ico
-  static_files: images/favicon.ico
-  upload: images/favicon.ico
-- url: /css
-  static_dir: css
-- url: /scripts
-  static_dir: scripts
-- url: /images
-  static_dir: images
-- url: /games
-  static_dir: games
+- url: /stats.*
+  script: $PYTHON_LIB/google/appengine/ext/appstats/ui.py
+
 - url: /.*
-  script: index.py
+  script: appengine-manage.py
