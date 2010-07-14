@@ -1,6 +1,7 @@
 # Django settings for website project.
 
-DEBUG = True
+#DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 import os.path
