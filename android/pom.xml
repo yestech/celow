@@ -1,37 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns="http://maven.apache.org/POM/4.0.0"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <modelVersion>4.0.0</modelVersion>
-  <parent>
-    <artifactId>parent</artifactId>
+<project xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <artifactId>parent</artifactId>
+        <groupId>org.yestech.celow</groupId>
+        <version>1.0.0-SNAPSHOT</version>
+    </parent>
     <groupId>org.yestech.celow</groupId>
-    <version>1.0.0-SNAPSHOT</version>
-  </parent>
-  <groupId>org.yestech.celow</groupId>
-  <artifactId>android</artifactId>
-  <name>Celow Android</name>
-  <url>http://celow.com</url>
+    <artifactId>android</artifactId>
+    <version>${celow.version}</version>
+    <name>Celow Android</name>
+    <url>http://celow.com</url>
     <packaging>apk</packaging>
-  <properties>
-    <android.version>2.1_r1</android.version>
-  </properties>
-  <dependencies>
-    <dependency>
-      <groupId>com.google.android</groupId>
-      <artifactId>android</artifactId>
-      <version>${android.version}</version>
-      <scope>provided</scope>
-    </dependency>
-            <dependency>
-                <groupId>com.google.android</groupId>
-                <artifactId>android-test</artifactId>
-                <version>${android.version}</version>
-      <scope>provided</scope>
-            </dependency>
-  </dependencies>
+    <properties>
+        <android.version>2.1_r1</android.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.yestech.celow</groupId>
+            <artifactId>core</artifactId>
+            <version>${celow.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android</artifactId>
+            <version>${android.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.android</groupId>
+            <artifactId>android-test</artifactId>
+            <version>${android.version}</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
     <build>
         <finalName>celow</finalName>
-<plugins>
+        <plugins>
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>maven-android-plugin</artifactId>
@@ -49,6 +56,6 @@
                 </configuration>
                 <extensions>true</extensions>
             </plugin>
-</plugins>
-</build>
-    </project>
+        </plugins>
+    </build>
+</project>
