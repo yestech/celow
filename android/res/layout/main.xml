@@ -1,13 +1,117 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    >
-<TextView  
-    android:layout_width="fill_parent" 
-    android:layout_height="wrap_content" 
-    android:text="Hello World, CelowAppActivity"
-    />
-</LinearLayout>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent">
+
+    <!-- Status about game -->
+    <TableLayout
+            android:id="@+id/status_layer"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:stretchColumns="1"
+            >
+        <TableRow>
+            <TableLayout
+                    android:id="@+id/bank_status_layer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    >
+                <TableRow>
+                    <TextView
+                            android:id="@+id/bank_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/bank_label_text"
+                            style="@style/defaultLabel"
+                            />
+                    <TextView
+                            android:id="@+id/bank_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            style="@style/defaultValue"
+                            />
+                </TableRow>
+                <TableRow android:id="@+id/point_row">
+                    <TextView
+                            android:id="@+id/point_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/point_label_text"
+                            style="@style/defaultLabel"
+                            />
+                    <TextView
+                            android:id="@+id/point_value"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="0"
+                            style="@style/defaultValue"
+                            />
+                </TableRow>
+            </TableLayout>
+            <TextView
+                    android:id="@+id/status_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:text="@string/default_status_text"
+                    style="@style/statusValue"
+                    />
+            <TableLayout
+                    android:id="@+id/wager_status_layer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    >
+                <TableRow>
+                    <TextView
+                            android:id="@+id/wager_label"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/wager_label_text"
+                            style="@style/wagerLabel"
+                            />
+                    <EditText android:id="@+id/wager_text_field"
+                              android:layout_height="wrap_content"
+                              android:layout_width="wrap_content"
+                              android:inputType="numberDecimal"
+                              android:text="0"
+                              style="@style/wager"
+                            />
+                </TableRow>
+            </TableLayout>
+        </TableRow>
+    </TableLayout>
+    <!--
+    game area
+    -->
+    <LinearLayout
+            android:id="@+id/game_play_layer"
+            android:layout_alignParentBottom="true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/status_layer"
+            >
+        <TextView android:id="@+id/die1"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/defaultLabel"
+                  android:text="0"
+                />
+        <TextView android:id="@+id/die2"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/defaultLabel"
+                  android:text="0"
+                />
+        <TextView android:id="@+id/die3"
+                  android:layout_width="wrap_content"
+                  android:layout_height="wrap_content"
+                  style="@style/defaultLabel"
+                  android:text="0"
+                />
+    </LinearLayout>
+</RelativeLayout>
+
 
