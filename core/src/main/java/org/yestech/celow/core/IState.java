@@ -7,7 +7,7 @@ package org.yestech.celow.core;
 public interface IState {
     int getDie(int die);
 
-    double getTotal();
+    int getTotal();
 
     String getBank();
 
@@ -21,7 +21,7 @@ public interface IState {
 
     void setResult(GameResultEnum title);
 
-    void setTotal(double total);
+    void setTotal(int total);
 
     void setPoint(int point);
 

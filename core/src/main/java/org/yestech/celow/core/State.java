@@ -8,7 +8,7 @@ import static java.lang.String.valueOf;
  */
 public class State implements IState {
     private int[] dice = new int[3];
-    private double total;
+    private int total;
     private boolean point;
     private int pointValue;
     private GameResultEnum result;
@@ -24,7 +24,7 @@ public class State implements IState {
     }
 
     @Override
-    public double getTotal() {
+    public int getTotal() {
         return total;
     }
 
@@ -59,7 +59,7 @@ public class State implements IState {
     }
 
     @Override
-    public void setTotal(double total) {
+    public void setTotal(int total) {
         this.total = total;
     }
 

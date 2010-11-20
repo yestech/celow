@@ -1,6 +1,7 @@
 package org.yestech.celow.android;
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
@@ -27,9 +28,11 @@ public class AndroidView implements IView {
     private TextView die2;
     private TextView die3;
     private Context context;
+    private Resources resources;
 
     public AndroidView(Context context) {
         this.context = context;
+        resources = context.getResources();
     }
 
     public TextView getDie1() {
@@ -168,11 +171,11 @@ public class AndroidView implements IView {
             bank = "0";
         }
         if (state.getTotal() < 0) {
-            bankValue.setTextColor(Color.RED);
+            bankValue.setTextColor(resources.getColor(R.color.negative_balance));
         } else if (state.getTotal() > 0) {
-            bankValue.setTextColor(Color.GREEN);
+            bankValue.setTextColor(resources.getColor(R.color.positive_balance));
         } else {
-            bankValue.setTextColor(Color.WHITE);
+            bankValue.setTextColor(resources.getColor(R.color.even_balance));
         }
         setBankValue(bank);
     }
