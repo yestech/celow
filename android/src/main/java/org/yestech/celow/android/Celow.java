@@ -22,7 +22,7 @@ public class Celow extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gameStatus = new GameStatus();
+        gameStatus = new GameStatus(this);
         game = new Game(gameStatus);
         gestureDetector = new GestureDetector(new ProcessSwipeGesture(game));
         //need to add to parent first for hierarchy

@@ -5,6 +5,8 @@ import android.view.GestureDetector;
 import android.view.MotionEvent;
 
 import static java.lang.Math.abs;
+import static java.lang.Math.pow;
+import static java.lang.Math.sqrt;
 
 /**
  *
@@ -12,10 +14,8 @@ import static java.lang.Math.abs;
  */
 public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener {
     private final static String TAG = "ProcessSwipeGesture";
-
-    private static final int SWIPE_MIN_DISTANCE = 75;
-    private static final int SWIPE_THRESHOLD_VELOCITY = 50;
     private Game game;
+    private static final double MIN_DISTANCE = 10;
 
     public ProcessSwipeGesture(Game game) {
         this.game = game;
@@ -23,18 +23,24 @@ public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        boolean processed = false;
         Log.d(TAG, "begin swipe caught");
-        if (e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-            Log.d(TAG, "process roll left to right swipe");
+        double distance = calculateDistance(e1, e2);
+        Log.d(TAG, "swipe distance: "+ distance);
+        if (distance > MIN_DISTANCE) {
+            Log.d(TAG, "processing roll");
             game.roll();
-            processed = true;
-        } else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-            Log.d(TAG, "process roll right to left swipe");
-            game.roll();
-            processed = true;
         }
         Log.d(TAG, "end swipe caught");
-        return processed;
+        return true;
+    }
+
+    private double calculateDistance(MotionEvent e1, MotionEvent e2) {
+        float x1 =e1.getX();
+        float y1 =e1.getY();
+        float x2 =e2.getX();
+        float y2 =e2.getY();
+        double x = pow(x2 - x1, 2);
+        double y = pow(y2 - y1, 2);
+        return sqrt(x + y);
     }
 }

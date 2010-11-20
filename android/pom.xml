@@ -15,8 +15,12 @@
     <url>http://celow.com</url>
     <packaging>apk</packaging>
     <properties>
-        <android.version>2.1.2</android.version>
+        <android.sdk.version>2.2.1</android.sdk.version>
         <android.sdk.home>/usr/local/android-sdk</android.sdk.home>
+        <maven-android-plugin.version>2.6.0</maven-android-plugin.version>
+        <android.platform.version>8</android.platform.version>
+        <!--<android.virtual.device>avd_2.1</android.virtual.device>-->
+        <android.virtual.device>avd_2.2</android.virtual.device>
     </properties>
     <dependencies>
         <dependency>
@@ -27,39 +31,79 @@
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>${android.version}</version>
+            <version>${android.sdk.version}</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android-test</artifactId>
-            <version>${android.version}</version>
+            <version>${android.sdk.version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
     <build>
         <finalName>celow</finalName>
+        <!--<resources>-->
+            <!--<resource>-->
+                <!--<directory>${basedir}/res</directory>-->
+                <!--<filtering>true</filtering>-->
+                <!--<targetPath>${project.build.outputDirectory}/filtered-res</targetPath>-->
+            <!--</resource>-->
+            <!--<resource>-->
+                <!--<targetPath>${project.basedir}/target/filtered-manifest</targetPath>-->
+                <!--<filtering>true</filtering>-->
+                <!--<directory>${basedir}</directory>-->
+                <!--<includes>-->
+                    <!--<include>AndroidManifest.xml</include>-->
+                <!--</includes>-->
+            <!--</resource>-->
+        <!--</resources>-->
         <plugins>
+            <!--<plugin>-->
+                <!--<artifactId>maven-resources-plugin</artifactId>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<phase>initialize</phase>-->
+                        <!--<goals>-->
+                            <!--<goal>resources</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>maven-android-plugin</artifactId>
-                <version>2.6.0</version>
+                <version>${maven-android-plugin.version}</version>
                 <configuration>
+                    <!--<androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml-->
+                    <!--</androidManifestFile>-->
+                    <!--<resourceDirectory>${project.build.outputDirectory}/filtered-res</resourceDirectory>-->
                     <sdk>
-                        <platform>7</platform>
+                        <platform>${android.platform.version}</platform>
                         <path>${android.sdk.home}</path>
                     </sdk>
                     <emulator>
-                        <!-- the name of the avd device to use for starting the emulator --><!--
-                        <avd>avd_2.1</avd>
-                        -->
-                        <avd>avd_2.2</avd>
+                        <!-- the name of the avd device to use for starting the emulator -->
+                        <avd>${android.virtual.device}</avd>
                     </emulator>
                     <deleteConflictingFiles>true</deleteConflictingFiles>
                     <undeployBeforeDeploy>true</undeployBeforeDeploy>
                 </configuration>
                 <extensions>true</extensions>
             </plugin>
+            <!--<plugin>-->
+                <!--<groupId>org.codehaus.mojo</groupId>-->
+                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
+                <!--<version>1.5</version>-->
+                <!--<executions>-->
+                    <!--<execution>-->
+                        <!--<id>parse-version</id>-->
+                        <!--<goals>-->
+                            <!--<goal>parse-version</goal>-->
+                        <!--</goals>-->
+                    <!--</execution>-->
+                <!--</executions>-->
+            <!--</plugin>-->
         </plugins>
     </build>
 </project>

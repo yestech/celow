@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celow</string>
-    <string name="default_status_text">...Welcome To Celow...</string>
-    <string name="point_status_text">     ....... Point .......</string>
-    <string name="loser_status_text">     ....... Loser .......</string>
-    <string name="winner_status_text">     ....... Winner .......</string>
-    <string name="nothing_status_text">     ....... Nothing .......</string>
-    <string name="computer_nothing_status_text">....... Computer Nothing .......</string>
-    <string name="computer_winner_status_text">....... Computer Winner .......</string>
-    <string name="computer_loser_status_text">....... Computer Loser .......</string>
-    <string name="push_status_text">     ....... PUSH .......</string>
+    <string name="app_version">1.0</string>
+    <string name="copyright">YES Technology - yestech.org (1999-2010)</string>
+    <string-array name="developers">
+        <item>Artie Copeland</item>
+    </string-array>
+    <string name="default_status_text">... Welcome To Celow ...</string>
+    <string name="point_status_text">.... Point ....</string>
+    <string name="loser_status_text">.... Loser ....</string>
+    <string name="winner_status_text">.... Winner ....</string>
+    <string name="nothing_status_text">.... Nothing ....</string>
+    <string name="computer_nothing_status_text">.... Computer Nothing ....</string>
+    <string name="computer_winner_status_text">.... Computer Winner ....</string>
+    <string name="computer_loser_status_text">.... Computer Loser ....</string>
+    <string name="push_status_text">.... PUSH ....</string>
     <string name="invalid_wager_status_text">.... Wager must be greater than 0 ....</string>
     <string name="wager_label_text">Wager:</string>
     <string name="bank_label_text">Bank:</string>

@@ -1,15 +1,20 @@
 package org.yestech.celow.android;
 
+import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /**
  *
  *
  */
 public class GameStatus {
+    private final static String TAG = "GameStatus";
+
     private TextView pointValue;
     private EditText wagerValue;
     private TextView bankValue;
@@ -18,6 +23,11 @@ public class GameStatus {
     private TextView die1;
     private TextView die2;
     private TextView die3;
+    private Context context;
+
+    public GameStatus(Context context) {
+        this.context = context;
+    }
 
     public TextView getDie1() {
         return die1;
@@ -59,6 +69,10 @@ public class GameStatus {
         this.wagerValue = wagerValue;
     }
 
+    public String getWagerAmount() {
+        return wagerValue.getText().toString();
+    }
+
     public TextView getBankValue() {
         return bankValue;
     }
@@ -86,5 +100,32 @@ public class GameStatus {
     public void hidePoint() {
         pointRow.setVisibility(View.INVISIBLE);
         pointValue.setText("0");
+    }
+
+    public void showInvalidAmount() {
+        Toast.makeText(context, R.string.invalid_wager_status_text,Toast.LENGTH_LONG).show();
+    }
+
+    public void setBankValue(String bank) {
+        bankValue.setText(bank);
+    }
+
+    public void setStatusValue(int title) {
+        statusLabel.setText(title);
+    }
+
+    public void setDie1Value(int i) {
+        die1.setText(String.valueOf(i));
+    }
+    public void setDie2Value(int i) {
+        die2.setText(String.valueOf(i));
+    }
+    public void setDie3Value(int i) {
+        die3.setText(String.valueOf(i));
+    }
+
+    public void showPoint(String point) {
+        pointRow.setVisibility(View.VISIBLE);
+        pointValue.setText(point);
     }
 }
