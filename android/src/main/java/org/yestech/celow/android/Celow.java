@@ -8,13 +8,15 @@ import android.view.MotionEvent;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
+import org.yestech.celow.core.IGame;
+import org.yestech.celow.core.Game;
 
 public class Celow extends Activity {
     private final static String TAG = "Celow";
 
     private GestureDetector gestureDetector;
-    private Game game;
-    private GameStatus gameStatus;
+    private IGame game;
+    private AndroidView androidGameView;
 
     /**
      * Called when the activity is first created.
@@ -22,8 +24,9 @@ public class Celow extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gameStatus = new GameStatus(this);
-        game = new Game(gameStatus);
+        androidGameView = new AndroidView(this);
+        game = new Game();
+        game.setView(androidGameView);
         gestureDetector = new GestureDetector(new ProcessSwipeGesture(game));
         //need to add to parent first for hierarchy
         Log.d(TAG, "adding main layout to parent");
@@ -31,7 +34,7 @@ public class Celow extends Activity {
         Log.d(TAG, "initializing game views");
         initalize();
         Log.d(TAG, "hiding point view");
-        gameStatus.hidePoint();
+        androidGameView.hidePoint();
     }
 
     private void initalize() {
@@ -40,18 +43,18 @@ public class Celow extends Activity {
         TextView statusLabel = (TextView) findViewById(R.id.status_label);
         TextView bankValue = (TextView) findViewById(R.id.bank_value);
         EditText wagerValue = (EditText) findViewById(R.id.wager_text_field);
-        gameStatus.setPointRow(pointRow);
-        gameStatus.setPointValue(pointValue);
-        gameStatus.setStatusLabel(statusLabel);
-        gameStatus.setBankValue(bankValue);
-        gameStatus.setWagerValue(wagerValue);
+        androidGameView.setPointRow(pointRow);
+        androidGameView.setPointValue(pointValue);
+        androidGameView.setStatusLabel(statusLabel);
+        androidGameView.setBankValue(bankValue);
+        androidGameView.setWagerValue(wagerValue);
 
         TextView die1 = (TextView) findViewById(R.id.die1);
         TextView die2 = (TextView) findViewById(R.id.die2);
         TextView die3 = (TextView) findViewById(R.id.die3);
-        gameStatus.setDie1(die1);
-        gameStatus.setDie2(die2);
-        gameStatus.setDie3(die3);
+        androidGameView.setDie1(die1);
+        androidGameView.setDie2(die2);
+        androidGameView.setDie3(die3);
     }
 
     /**

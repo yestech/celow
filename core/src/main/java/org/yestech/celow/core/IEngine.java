@@ -55,4 +55,6 @@ public interface IEngine {
     int getPoint();
 
     void reset();
+
+    boolean isPoint();
 }

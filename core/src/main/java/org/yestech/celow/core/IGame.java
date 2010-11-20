@@ -16,29 +16,15 @@ public interface IGame {
 
     void rollDice();
 
-    void addPlayer(IPlayer player);
-
-    IPlayer getPlayer(String id);
-
-    IPlayer getPlayer(int i);
-
-    int getTotalPlayers();
-
     IEngine getEngine();
 
     void setEngine(IEngine engine);
 
-    int getCurrentPlayerIdx();
+    IState gettate();
 
-    void setCurrentPlayerIdx(int currentPlayer);
+    void setState(IState state);
 
-    IPlayer getCurrentPlayer();
+    IView getView();
 
-    IPlayer getPointPlayer();
-
-    boolean isPointInEffect();
-
-    boolean isInitialRoll();
-
-    void setInitialRoll(boolean initialRoll);
+    void setView(IView view);
 }

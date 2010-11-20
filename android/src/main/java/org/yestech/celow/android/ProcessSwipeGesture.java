@@ -3,6 +3,7 @@ package org.yestech.celow.android;
 import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
+import org.yestech.celow.core.IGame;
 
 import static java.lang.Math.abs;
 import static java.lang.Math.pow;
@@ -14,10 +15,10 @@ import static java.lang.Math.sqrt;
  */
 public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener {
     private final static String TAG = "ProcessSwipeGesture";
-    private Game game;
+    private IGame game;
     private static final double MIN_DISTANCE = 10;
 
-    public ProcessSwipeGesture(Game game) {
+    public ProcessSwipeGesture(IGame game) {
         this.game = game;
     }
 
@@ -28,7 +29,7 @@ public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener
         Log.d(TAG, "swipe distance: "+ distance);
         if (distance > MIN_DISTANCE) {
             Log.d(TAG, "processing roll");
-            game.roll();
+            game.rollDice();
         }
         Log.d(TAG, "end swipe caught");
         return true;

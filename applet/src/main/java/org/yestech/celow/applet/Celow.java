@@ -7,13 +7,12 @@
  */
 package org.yestech.celow.applet;
 
-import org.yestech.celow.core.*;
+import org.yestech.celow.core.Game;
+import org.yestech.celow.core.IGame;
 
 import java.applet.Applet;
 import java.awt.*;
 
-import static java.lang.Double.parseDouble;
-import static java.lang.String.valueOf;
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 import static org.yestech.celow.core.ICelowConstants.ABOUT_INFO;
@@ -205,17 +204,17 @@ public class Celow extends Applet implements Runnable {
         backtrack.addImage(imback, 0);
         add("South", southPanel);
         game = new Game();
-        addPlayer(PlayerTypeEnum.USER, "single user", "user");
-        addPlayer(PlayerTypeEnum.COMPUTER, "computer", "computer");
+//        addPlayer(PlayerTypeEnum.USER, "single user", "user");
+//        addPlayer(PlayerTypeEnum.COMPUTER, "computer", "computer");
     }
 
-    private void addPlayer(PlayerTypeEnum type, String id, String screenName) {
-        IPlayer player = new Player();
-        player.setId(id);
-        player.setScreenName(screenName);
-        player.setType(type);
-        game.addPlayer(player);
-    }
+//    private void addPlayer(PlayerTypeEnum type, String id, String screenName) {
+//        IPlayer player = new Player();
+//        player.setId(id);
+//        player.setScreenName(screenName);
+//        player.setType(type);
+////        game.addPlayer(player);
+//    }
 
     /**
      * @see java.applet.Applet#start()
@@ -285,103 +284,103 @@ public class Celow extends Applet implements Runnable {
      *
      */
     final public boolean action(Event evt, Object arg) {
-        if (evt.target == btRoll) {
-            if (game.isAmountValid(tfWager.getText())) {
-                IPlayer player = game.getCurrentPlayer();
-                player.setWager(parseDouble(tfWager.getText()));
-                game.rollDice();
-                processRoll();
-                return true;
-            } else {
-                title = INVALID_WAGER_TITLE;
-            }
-        }
+//        if (evt.target == btRoll) {
+//            if (game.isAmountValid(tfWager.getText())) {
+////                IPlayer player = game.getCurrentPlayer();
+//                player.setWager(parseDouble(tfWager.getText()));
+//                game.rollDice();
+//                processRoll();
+//                return true;
+//            } else {
+//                title = INVALID_WAGER_TITLE;
+//            }
+//        }
         return false;
     }
 
     void processRoll() {
-        IPlayer currentPlayer = game.getCurrentPlayer();
-        boolean inEffect = game.isPointInEffect();
-//        IPlayer pointPlayer = game.getPointPlayer();
-
-        ResultsEnum result = currentPlayer.getResult();
-        //make sure we are from 0..n-1
-        dice1 = diceImages[(currentPlayer.getDice1() - 1)];
-        dice2 = diceImages[(currentPlayer.getDice2() - 1)];
-        dice3 = diceImages[(currentPlayer.getDice3() - 1)];
-
-        if (inEffect) {
-            IPlayer pointPlayer = game.getPointPlayer();
-            switch (result) {
-                case LOSER:
-                    title = COMPUTER_LOSER_TITLE;
-                    setBank(pointPlayer);
+//        IPlayer currentPlayer = game.getCurrentPlayer();
+//        boolean inEffect = game.isPointInEffect();
+////        IPlayer pointPlayer = game.getPointPlayer();
+//
+//        ResultsEnum result = currentPlayer.getResult();
+//        //make sure we are from 0..n-1
+//        dice1 = diceImages[(currentPlayer.getDice1() - 1)];
+//        dice2 = diceImages[(currentPlayer.getDice2() - 1)];
+//        dice3 = diceImages[(currentPlayer.getDice3() - 1)];
+//
+//        if (inEffect) {
+//            IPlayer pointPlayer = game.getPointPlayer();
+//            switch (result) {
+//                case LOSER:
+//                    title = COMPUTER_LOSER_TITLE;
+//                    setBank(pointPlayer);
+////                    hidePoint();
+//                    break;
+//                case WINNER:
+//                    title = COMPUTER_WINNER_TITLE;
+//                    setBank(pointPlayer);
+////                    hidePoint();
+//                    break;
+//                case POINT:
+//                    if (pointPlayer.getPoint() < currentPlayer.getPoint()) {
+//                        title = COMPUTER_WINNER_TITLE;
+//                        setBank(pointPlayer);
+//                        setPoint(currentPlayer);
+//                    } else if (currentPlayer.getPoint() == pointPlayer.getPoint()) {
+//                        title = PUSH_TITLE;
+//                        setBank(pointPlayer);
+//                        setPoint(currentPlayer);
+//                    } else if (pointPlayer.getPoint() > currentPlayer.getPoint()) {
+//                        title = COMPUTER_LOSER_TITLE;
+//                        setBank(pointPlayer);
+//                        setPoint(currentPlayer);
+//                    }
+//                    break;
+//                case NOTHING:
+//                    title = COMPUTER_NOTHING_TITLE;
+//                    break;
+//            }
+//            game.setInitialRoll(true);
+//        } else {
+//            switch (result) {
+//                case LOSER:
+//                    title = LOSER_TITLE;
+//                    setBank(currentPlayer);
 //                    hidePoint();
-                    break;
-                case WINNER:
-                    title = COMPUTER_WINNER_TITLE;
-                    setBank(pointPlayer);
+//                    game.setInitialRoll(true);
+//                    break;
+//                case WINNER:
+//                    title = WINNER_TITLE;
+//                    setBank(currentPlayer);
 //                    hidePoint();
-                    break;
-                case POINT:
-                    if (pointPlayer.getPoint() < currentPlayer.getPoint()) {
-                        title = COMPUTER_WINNER_TITLE;
-                        setBank(pointPlayer);
-                        setPoint(currentPlayer);
-                    } else if (currentPlayer.getPoint() == pointPlayer.getPoint()) {
-                        title = PUSH_TITLE;
-                        setBank(pointPlayer);
-                        setPoint(currentPlayer);
-                    } else if (pointPlayer.getPoint() > currentPlayer.getPoint()) {
-                        title = COMPUTER_LOSER_TITLE;
-                        setBank(pointPlayer);
-                        setPoint(currentPlayer);
-                    }
-                    break;
-                case NOTHING:
-                    title = COMPUTER_NOTHING_TITLE;
-                    break;
-            }
-            game.setInitialRoll(true);
-        } else {
-            switch (result) {
-                case LOSER:
-                    title = LOSER_TITLE;
-                    setBank(currentPlayer);
-                    hidePoint();
-                    game.setInitialRoll(true);
-                    break;
-                case WINNER:
-                    title = WINNER_TITLE;
-                    setBank(currentPlayer);
-                    hidePoint();
-                    game.setInitialRoll(true);
-                    break;
-                case POINT:
-                    title = POINT_TITLE;
-                    setPoint(currentPlayer);
-                    game.setInitialRoll(false);
-                    break;
-                case NOTHING:
-                    title = NOTHING_TITLE;
-                    hidePoint();
-                    game.setInitialRoll(true);
-                    break;
-            }
-        }
+//                    game.setInitialRoll(true);
+//                    break;
+//                case POINT:
+//                    title = POINT_TITLE;
+//                    setPoint(currentPlayer);
+//                    game.setInitialRoll(false);
+//                    break;
+//                case NOTHING:
+//                    title = NOTHING_TITLE;
+//                    hidePoint();
+//                    game.setInitialRoll(true);
+//                    break;
+//            }
+//        }
     }
 
     private void hidePoint() {
         point = "0";
     }
 
-    private void setBank(IPlayer player) {
-        bank = valueOf(player.getBalance());
-    }
-
-    private void setPoint(IPlayer player) {
-        point = valueOf(player.getPoint());
-    }
+//    private void setBank(IPlayer player) {
+//        bank = valueOf(player.getBalance());
+//    }
+//
+//    private void setPoint(IPlayer player) {
+//        point = valueOf(player.getPoint());
+//    }
 
     final public void update(Graphics g) {
 //        if (imagesLoaded) {
@@ -420,13 +419,13 @@ public class Celow extends Applet implements Runnable {
             g.fillRect(0, 0, 150, getSize().height);
             g.setColor(Color.white);
             g.drawString("Bank:", 40, 150);
-            IPlayer player = game.getCurrentPlayer();
-            double balance = player.getBalance();
-            if (balance > 0) {
-                g.setColor(Color.green);
-            } else if (balance < 0) {
-                g.setColor(Color.red);
-            }
+//            IPlayer player = game.getCurrentPlayer();
+//            double balance = player.getBalance();
+//            if (balance > 0) {
+//                g.setColor(Color.green);
+//            } else if (balance < 0) {
+//                g.setColor(Color.red);
+//            }
             g.drawString(bank, 80, 150);
             g.setColor(Color.white);
             if (!"0".equals(point)) {

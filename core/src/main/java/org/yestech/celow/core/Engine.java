@@ -115,12 +115,6 @@ public class Engine implements IEngine {
         dice2 = ((int) ((random() * DICESIDES))) + 1;
         dice3 = ((int) ((random() * DICESIDES))) + 1;
         processResult();
-
-
-        System.out.println("Engine d1: " + dice1);
-        System.out.println("Engine d2: " + dice2);
-        System.out.println("Engine d3: " + dice3);
-        System.out.println("Engine result: " + result);
     }
 
     protected void processResult() {
@@ -175,5 +169,10 @@ public class Engine implements IEngine {
         } else {
             result = NOTHING;
         }
+    }
+
+    @Override
+    public boolean isPoint() {
+        return ResultsEnum.POINT == result;
     }
 }
