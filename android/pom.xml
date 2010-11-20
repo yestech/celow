@@ -43,41 +43,41 @@
     </dependencies>
     <build>
         <finalName>celow</finalName>
-        <!--<resources>-->
-            <!--<resource>-->
-                <!--<directory>${basedir}/res</directory>-->
-                <!--<filtering>true</filtering>-->
-                <!--<targetPath>${project.build.outputDirectory}/filtered-res</targetPath>-->
-            <!--</resource>-->
-            <!--<resource>-->
-                <!--<targetPath>${project.basedir}/target/filtered-manifest</targetPath>-->
-                <!--<filtering>true</filtering>-->
-                <!--<directory>${basedir}</directory>-->
-                <!--<includes>-->
-                    <!--<include>AndroidManifest.xml</include>-->
-                <!--</includes>-->
-            <!--</resource>-->
-        <!--</resources>-->
+        <resources>
+            <resource>
+                <directory>${basedir}/res</directory>
+                <filtering>true</filtering>
+                <targetPath>${project.build.outputDirectory}/filtered-res</targetPath>
+            </resource>
+            <resource>
+                <targetPath>${project.basedir}/target/filtered-manifest</targetPath>
+                <filtering>true</filtering>
+                <directory>${basedir}</directory>
+                <includes>
+                    <include>AndroidManifest.xml</include>
+                </includes>
+            </resource>
+        </resources>
         <plugins>
-            <!--<plugin>-->
-                <!--<artifactId>maven-resources-plugin</artifactId>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<phase>initialize</phase>-->
-                        <!--<goals>-->
-                            <!--<goal>resources</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <artifactId>maven-resources-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>resources</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>com.jayway.maven.plugins.android.generation2</groupId>
                 <artifactId>maven-android-plugin</artifactId>
                 <version>${maven-android-plugin.version}</version>
                 <configuration>
-                    <!--<androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml-->
-                    <!--</androidManifestFile>-->
-                    <!--<resourceDirectory>${project.build.outputDirectory}/filtered-res</resourceDirectory>-->
+                    <androidManifestFile>${project.build.directory}/filtered-manifest/AndroidManifest.xml
+                    </androidManifestFile>
+                    <resourceDirectory>${project.build.outputDirectory}/filtered-res</resourceDirectory>
                     <sdk>
                         <platform>${android.platform.version}</platform>
                         <path>${android.sdk.home}</path>
@@ -91,19 +91,19 @@
                 </configuration>
                 <extensions>true</extensions>
             </plugin>
-            <!--<plugin>-->
-                <!--<groupId>org.codehaus.mojo</groupId>-->
-                <!--<artifactId>build-helper-maven-plugin</artifactId>-->
-                <!--<version>1.5</version>-->
-                <!--<executions>-->
-                    <!--<execution>-->
-                        <!--<id>parse-version</id>-->
-                        <!--<goals>-->
-                            <!--<goal>parse-version</goal>-->
-                        <!--</goals>-->
-                    <!--</execution>-->
-                <!--</executions>-->
-            <!--</plugin>-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>build-helper-maven-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <id>parse-version</id>
+                        <goals>
+                            <goal>parse-version</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 </project>
