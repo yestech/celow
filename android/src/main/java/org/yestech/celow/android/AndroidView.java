@@ -1,6 +1,7 @@
 package org.yestech.celow.android;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TableRow;
@@ -135,22 +136,45 @@ public class AndroidView implements IView {
 
     @Override
     public void update(IState state) {
+        updateStatus(state);
+        updateDice(state);
+        updateBank(state);
+        updatePoint(state);
+    }
+
+    private void updateStatus(IState state) {
         GameResultEnum result = state.getResult();
         setStatusValue(getTitle(result));
+    }
+
+    private void updateDice(IState state) {
         setDie1Value(state.getDie(0));
         setDie2Value(state.getDie(1));
         setDie3Value(state.getDie(2));
-        String bank = state.getBank();
-        if (bank == null || bank.equals("")) {
-            bank = "0";
-        }
-        setBankValue(bank);
+    }
+
+    private void updatePoint(IState state) {
         boolean hasPoint = state.isPoint();
         if (hasPoint) {
             showPoint(state.getPointAsString());
         } else {
             hidePoint();
         }
+    }
+
+    private void updateBank(IState state) {
+        String bank = state.getBank();
+        if (bank == null || bank.equals("")) {
+            bank = "0";
+        }
+        if (state.getTotal() < 0) {
+            bankValue.setTextColor(Color.RED);
+        } else if (state.getTotal() > 0) {
+            bankValue.setTextColor(Color.GREEN);
+        } else {
+            bankValue.setTextColor(Color.WHITE);
+        }
+        setBankValue(bank);
     }
 
     protected int getTitle(GameResultEnum result) {

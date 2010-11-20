@@ -17,6 +17,22 @@ public class Celow extends Activity {
     private GestureDetector gestureDetector;
     private IGame game;
     private AndroidView androidGameView;
+    private boolean running = false;
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //save state
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (!running) {
+            //reload state
+
+        }
+    }
 
     /**
      * Called when the activity is first created.
@@ -35,6 +51,7 @@ public class Celow extends Activity {
         initalize();
         Log.d(TAG, "hiding point view");
         androidGameView.hidePoint();
+        running = true;
     }
 
     private void initalize() {
