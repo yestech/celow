@@ -37,14 +37,14 @@ public class StateDao {
         ObjectOutputStream stream = null;
         try {
             FileOutputStream fileStream = null;
-            if (Environment.MEDIA_MOUNTED.equals(getExternalStorageState())) {
-                //save to external
-                File externalFilesDir = context.getExternalFilesDir(null);
-                fileStream = new FileOutputStream(new File(externalFilesDir, FILENAME_NAME));
-            } else {
+//            if (Environment.MEDIA_MOUNTED.equals(getExternalStorageState())) {
+//                //save to external
+//                File externalFilesDir = context.getExternalFilesDir(null);
+//                fileStream = new FileOutputStream(new File(externalFilesDir, FILENAME_NAME));
+//            } else {
                 //save internal
                 fileStream = context.openFileOutput(FILENAME_NAME, Context.MODE_PRIVATE);
-            }
+//            }
             stream = new ObjectOutputStream(fileStream);
             stream.writeObject(state);
         } catch (IOException e) {
@@ -74,13 +74,13 @@ public class StateDao {
 
     public void delete() {
         FileOutputStream fileStream = null;
-        if (Environment.MEDIA_MOUNTED.equals(getExternalStorageState())) {
-            //save to external
-            File externalFilesDir = context.getExternalFilesDir(null);
-            File gameStateFile = new File(externalFilesDir, FILENAME_NAME);
-            //delete external file
-            gameStateFile.delete();
-        }
+//        if (Environment.MEDIA_MOUNTED.equals(getExternalStorageState())) {
+//            //save to external
+//            File externalFilesDir = context.getExternalFilesDir(null);
+//            File gameStateFile = new File(externalFilesDir, FILENAME_NAME);
+//            //delete external file
+//            gameStateFile.delete();
+//        }
         //delete internal
         context.deleteFile(FILENAME_NAME);
     }
@@ -90,14 +90,14 @@ public class StateDao {
         ObjectInputStream stream = null;
         try {
             FileInputStream fileStream = null;
-            if (Environment.MEDIA_MOUNTED.equals(getExternalStorageState())) {
-                //save to external
-                File externalFilesDir = context.getExternalFilesDir(null);
-                fileStream = new FileInputStream(new File(externalFilesDir, FILENAME_NAME));
-            } else {
+//            if (Environment.MEDIA_MOUNTED.equals(getExternalStorageState())) {
+//                //save to external
+//                File externalFilesDir = context.getExternalFilesDir(null);
+//                fileStream = new FileInputStream(new File(externalFilesDir, FILENAME_NAME));
+//            } else {
                 //save internal
                 fileStream = context.openFileInput(FILENAME_NAME);
-            }
+//            }
             stream = new ObjectInputStream(fileStream);
             state = (IState) stream.readObject();
         } catch (IOException e) {
