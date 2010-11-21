@@ -10,6 +10,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 import org.yestech.celow.core.IGame;
 import org.yestech.celow.core.Game;
+import org.yestech.celow.core.IState;
 
 public class Celow extends Activity {
     private final static String TAG = "Celow";
@@ -18,20 +19,31 @@ public class Celow extends Activity {
     private IGame game;
     private AndroidView androidGameView;
     private boolean running = false;
+    private StateDao stateDao;
 
     @Override
     protected void onPause() {
-        super.onPause();
         //save state
+        stateDao.save(game.getState());
+        running = false;
+        super.onPause();
     }
 
     @Override
     protected void onResume() {
-        super.onResume();
-        if (!running) {
+        if (!running && stateDao != null) {
             //reload state
-
+            IState state = stateDao.load();
+            game.apply(state);
+            running = true;
         }
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        stateDao.delete();
+        super.onStop();
     }
 
     /**
@@ -40,16 +52,14 @@ public class Celow extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.stateDao = new StateDao(this);
         androidGameView = new AndroidView(this);
         game = new Game();
         game.setView(androidGameView);
         gestureDetector = new GestureDetector(new ProcessSwipeGesture(game));
         //need to add to parent first for hierarchy
-        Log.d(TAG, "adding main layout to parent");
         setContentView(R.layout.main);
-        Log.d(TAG, "initializing game views");
         initalize();
-        Log.d(TAG, "hiding point view");
         androidGameView.hidePoint();
         running = true;
     }

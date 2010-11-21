@@ -1,5 +1,8 @@
 package org.yestech.celow.core;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static java.lang.String.valueOf;
 
 /**
@@ -7,20 +10,21 @@ import static java.lang.String.valueOf;
  *
  */
 public class State implements IState {
-    private int[] dice = new int[3];
+    private List<Integer> dice = new ArrayList<Integer>(3);
     private int total;
     private boolean point;
     private int pointValue;
     private GameResultEnum result;
+    private static final long serialVersionUID = -1155542650736376361L;
 
     @Override
     public void setDie(int die, int value) {
-        dice[die] = value;
+        dice.add(die, value);
     }
 
     @Override
     public int getDie(int die) {
-        return dice[die];
+        return dice.get(die);
     }
 
     @Override
@@ -77,5 +81,42 @@ public class State implements IState {
     public void resetPoint() {
         setPoint(false);
         setPoint(0);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        State state = (State) o;
+
+        if (point != state.point) return false;
+        if (pointValue != state.pointValue) return false;
+        if (total != state.total) return false;
+        if (dice != null ? !dice.equals(state.dice) : state.dice != null) return false;
+        if (result != state.result) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result1 = dice != null ? dice.hashCode() : 0;
+        result1 = 31 * result1 + total;
+        result1 = 31 * result1 + (point ? 1 : 0);
+        result1 = 31 * result1 + pointValue;
+        result1 = 31 * result1 + (result != null ? result.hashCode() : 0);
+        return result1;
+    }
+
+    @Override
+    public String toString() {
+        return "State{" +
+                "dice=" + dice +
+                ", total=" + total +
+                ", point=" + point +
+                ", pointValue=" + pointValue +
+                ", result=" + result +
+                '}';
     }
 }

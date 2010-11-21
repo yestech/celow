@@ -20,11 +20,13 @@ public interface IGame {
 
     void setEngine(IEngine engine);
 
-    IState gettate();
+    IState getState();
 
     void setState(IState state);
 
     IView getView();
 
     void setView(IView view);
+
+    void apply(IState state);
 }

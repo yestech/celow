@@ -1,10 +1,12 @@
 package org.yestech.celow.core;
 
+import java.io.Serializable;
+
 /**
  *
  *
  */
-public interface IState {
+public interface IState extends Serializable {
     int getDie(int die);
 
     int getTotal();

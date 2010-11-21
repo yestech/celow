@@ -75,7 +75,6 @@
                             />
                     <EditText android:id="@+id/wager_text_field"
                               android:layout_height="wrap_content"
-                              android:layout_width="37px"
                               android:inputType="number"
                               android:editable="true"
                               android:maxLength="6"

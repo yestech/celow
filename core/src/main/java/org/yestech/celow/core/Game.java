@@ -23,13 +23,24 @@ public class Game implements IGame {
     }
 
     @Override
-    public IState gettate() {
+    public IState getState() {
         return state;
     }
 
     @Override
     public void setState(IState state) {
         this.state = state;
+    }
+
+    @Override
+    public void apply(IState state) {
+        setState(state);
+        if (state.isPoint()) {
+            initializePoint(state.getPoint());
+        } else {
+            resetPoint();
+        }
+        view.update(state);
     }
 
     @Override
@@ -54,7 +65,6 @@ public class Game implements IGame {
 
     private void processRoll() {
         ResultsEnum result = engine.getResult();
-        boolean currentPoint = engine.isPoint();
         int point = engine.getPoint();
         state.setDie(0, engine.getDice1());
         state.setDie(1, engine.getDice2());

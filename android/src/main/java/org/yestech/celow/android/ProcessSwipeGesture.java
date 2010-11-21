@@ -24,14 +24,10 @@ public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener
 
     @Override
     public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-        Log.d(TAG, "begin swipe caught");
         double distance = calculateDistance(e1, e2);
-        Log.d(TAG, "swipe distance: "+ distance);
         if (distance > MIN_DISTANCE) {
-            Log.d(TAG, "processing roll");
             game.rollDice();
         }
-        Log.d(TAG, "end swipe caught");
         return true;
     }
 
