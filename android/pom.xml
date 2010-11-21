@@ -48,6 +48,17 @@
                 <directory>${basedir}/res</directory>
                 <filtering>true</filtering>
                 <targetPath>${project.build.outputDirectory}/filtered-res</targetPath>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>${basedir}/res</directory>
+                <filtering>false</filtering>
+                <targetPath>${project.build.outputDirectory}/filtered-res</targetPath>
+                <includes>
+                    <include>**/*.png</include>
+                </includes>
             </resource>
             <resource>
                 <targetPath>${project.basedir}/target/filtered-manifest</targetPath>

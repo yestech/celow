@@ -1,3 +1,6 @@
 <resources>
     <drawable name="icon">@drawable/dice_icon</drawable>
+    <drawable name="quit_menu">@drawable/stop</drawable>
+    <drawable name="about_menu">@drawable/cloud</drawable>
+    <drawable name="help_menu">@drawable/light</drawable>
 </resources>

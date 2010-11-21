@@ -3,6 +3,7 @@ package org.yestech.celow.android;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TableRow;
@@ -181,7 +182,7 @@ public class AndroidView implements IView {
     }
 
     protected int getTitle(GameResultEnum result) {
-        int title = R.string.computer_nothing_status_text;
+        int title = R.string.default_status_text;
         switch (result) {
             case LOSER:
                 title = R.string.loser_status_text;
@@ -191,7 +192,7 @@ public class AndroidView implements IView {
                 break;
             case NOTHING:
                 title = R.string.nothing_status_text;
-                break;            
+                break;
             case POINT:
                 title = R.string.point_status_text;
                 break;

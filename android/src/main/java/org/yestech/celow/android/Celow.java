@@ -1,10 +1,9 @@
 package org.yestech.celow.android;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.GestureDetector;
-import android.view.MotionEvent;
+import android.view.*;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
@@ -34,7 +33,9 @@ public class Celow extends Activity {
         if (!running && stateDao != null) {
             //reload state
             IState state = stateDao.load();
-            game.apply(state);
+            if (state != null && state.isInitialized()) {
+                game.apply(state);
+            }
             running = true;
         }
         super.onResume();
@@ -42,7 +43,7 @@ public class Celow extends Activity {
 
     @Override
     protected void onDestroy() {
-        stateDao.delete();
+//        stateDao.delete();
         super.onStop();
     }
 
@@ -58,7 +59,7 @@ public class Celow extends Activity {
         game.setView(androidGameView);
         gestureDetector = new GestureDetector(new ProcessSwipeGesture(game));
         //need to add to parent first for hierarchy
-        setContentView(R.layout.main);
+        setContentView(R.layout.celow);
         initalize();
         androidGameView.hidePoint();
         running = true;
@@ -96,5 +97,46 @@ public class Celow extends Activity {
             return true;
         else
             return false;
+    }
+
+    /**
+     * Create the Menu Options
+     *
+     * @param menu
+     * @return
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.about_menu:
+                show(About.class);
+                return true;
+//            case R.id.help_menu:
+//                show(Help.class);
+//                return true;
+            case R.id.quit_menu:
+                quit();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private void show(Class<?> activity) {
+        Intent myIntent = new Intent(this, activity);
+        startActivity(myIntent);
+    }
+
+    private void quit() {
+        stateDao.delete();
+        finish();
     }
 }

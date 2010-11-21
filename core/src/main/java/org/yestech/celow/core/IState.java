@@ -32,4 +32,6 @@ public interface IState extends Serializable {
     void resetPoint();
 
     void setDie(int die, int value);
+
+    boolean isInitialized();
 }

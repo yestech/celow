@@ -84,6 +84,15 @@ public class State implements IState {
     }
 
     @Override
+    public boolean isInitialized() {
+        boolean initiaized = false;
+        if (result != null && dice != null && dice.size() == 3) {
+            initiaized = true;
+        }
+        return initiaized;
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;

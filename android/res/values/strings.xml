@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Celow</string>
-    <string name="app_version">1.0</string>
-    <string name="copyright">YES Technology - yestech.org (1999-2010)</string>
-    <string-array name="developers">
-        <item>Artie Copeland</item>
-    </string-array>
+    <string name="app_version">${project.version}</string>
+    <string name="url">${project.url}</string>
+    <string name="copyright">YES Technology (1999-2010)</string>
+    <string name="copyright_holder_url">http://yestech.org</string>
     <string name="default_status_text">... Welcome To Celow ...</string>
     <string name="point_status_text">.... Point ....</string>
     <string name="loser_status_text">.... Loser ....</string>
@@ -15,8 +14,15 @@
     <string name="computer_winner_status_text">.... Computer Winner ....</string>
     <string name="computer_loser_status_text">.... Computer Loser ....</string>
     <string name="push_status_text">.... PUSH ....</string>
-    <string name="invalid_wager_status_text">.... Wager must be greater than 0 ....</string>
+    <string name="invalid_wager_status_text">Wager must be greater than 0</string>
     <string name="wager_label_text">Wager:</string>
     <string name="bank_label_text">Bank:</string>
     <string name="point_label_text">Point:</string>
+    <string name="quit">Quit</string>
+    <string name="about">About</string>
+    <string name="help">Help</string>
+    <!--<string name="developers">Artie Copeland\nGreg Crow</string>-->
+    <string name="developers">Artie Copeland</string>
+    <string name="developers_label">Team:</string>
+    <string name="copyright_label">Copyright:</string>
 </resources>
