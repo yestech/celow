@@ -25,4 +25,5 @@
     <string name="developers">Artie Copeland</string>
     <string name="developers_label">Team</string>
     <string name="copyright_label">Copyright</string>
+    <string name="help_url">http://celow.com/help/</string>
 </resources>

@@ -1,26 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--<manifest xmlns:android="http://schemas.android.com/apk/res/android"-->
-      <!--package="org.yestech.celow.android"-->
-      <!--android:versionName="1"-->
-      <!--android:versionCode="1"-->
-      <!-->-->
+<!--package="org.yestech.celow.android"-->
+<!--android:versionName="1"-->
+<!--android:versionCode="1"-->
+<!-->-->
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="org.yestech.celow.android"
-      android:versionName="${project.version}"
-      android:versionCode="${parsedVersion.majorVersion}${parsedVersion.minorVersion}${parsedVersion.incrementalVersion}"
-      >
-    <application android:label="@string/app_name" android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"
-             android:icon="@drawable/icon">
+          package="org.yestech.celow.android"
+          android:versionName="${project.version}"
+          android:versionCode="${parsedVersion.majorVersion}${parsedVersion.minorVersion}${parsedVersion.incrementalVersion}"
+        >
+    <application android:label="@string/app_name"
+                 android:theme="@android:style/Theme.Wallpaper.NoTitleBar.Fullscreen"
+                 android:icon="@drawable/icon">
         <activity android:name=".Celow"
                   android:label="@string/app_name"
-                android:screenOrientation="landscape" android:icon="@drawable/icon">
+                  android:screenOrientation="landscape" android:icon="@drawable/icon">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".About" android:label="@string/about"/>
-        <activity android:name=".Help" android:label="@string/help"/>
+        <activity android:name=".About" android:label="@string/about"
+                  android:theme="@android:style/Theme.NoTitleBar"/>
+        <activity android:name=".Help" android:label="@string/help"
+                android:theme="@android:style/Theme.NoTitleBar"/>
     </application>
-    <uses-sdk android:minSdkVersion="8" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-sdk android:minSdkVersion="8"/>
 </manifest> 

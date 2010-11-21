@@ -119,9 +119,9 @@ public class Celow extends Activity {
             case R.id.about_menu:
                 show(About.class);
                 return true;
-//            case R.id.help_menu:
-//                show(Help.class);
-//                return true;
+            case R.id.help_menu:
+                show(Help.class);
+                return true;
             case R.id.quit_menu:
                 quit();
                 return true;
