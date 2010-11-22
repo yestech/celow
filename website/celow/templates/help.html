@@ -1,20 +1,19 @@
 {% extends "base.html" %}
 
-{% block title %}Celow Help{% endblock %}
+{% block title %}Celow {% block gametype %}{% endblock %} Help{% endblock %}
 
 {% block content %}
 <center>
 <table bgcolor="#000000" border=4 cellspacing=0 cellpadding=0>
 <td width=600>
-<P><FONT SIZE="+2"><A NAME="Objective">Objective</A></FONT></P>
+<P><span SIZE="+2"><A NAME="Objective">Objective</A></span></P>
 <OL>
 <LI>The objective of the game is to roll a <A HREF="#Winning">winning</A> hand
  or the highest <A HREF="#Point">point</A>.</LI></OL>
-<P><FONT SIZE="+2">Rules</FONT></P>
+<P><span SIZE="+2">Rules</span></P>
 <OL>
-<LI>Place any number you wish in the wager field to place a bet, although it is
-not required to play the game.</LI>
-<LI>Click on the Roll button to begin the game.</LI>
+<LI>Place any number you wish in the wager field to place a bet.</LI>
+<li>{% block rollmethod %}{% endblock %}</li>
 <LI>After you roll you will see the result of your roll in the dice and by a
 banner at the top of window
 <UL>
@@ -66,12 +65,10 @@ number and the last is a 1. ex.: 2,2,1 or 2,1,2.</LI>
 screen that says &quot;You <A HREF="#Losing">Lose</A> !!!!!!!&quot; and the
 money that you wagered will be subtracted to your bank on the left of the
 screen.</LI></UL></LI>
-<LI>To play again just repeat the process, by clicking the roll button.</LI>
-<LI>If for any reason you would like to quit you can do it 3 different ways
-<OL>
-<LI>Click the back button on your browsers toolbar.</LI>
-<LI>Click on the Quit button on your screen.</LI>
-<LI>Click on any one of the 2 links at the bottom of the screen.</LI></OL></LI></OL>
+<li>To play again just repeat the process</li>
+
+<li>{% block quitmethod %}{% endblock %}</li>
+</OL>
 <P><BR></P>
 <P>Back to <A HREF="#Top">top</A></P>
 </td>

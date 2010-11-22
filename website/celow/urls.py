@@ -9,8 +9,9 @@ from django.conf import settings
 urlpatterns = patterns('',
     #default index page
     (r'^$', direct_to_template, {'template': 'index.html'}),
-    (r'^help/', direct_to_template, {'template': 'help.html'}),
-    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),    
+    (r'^help/', direct_to_template, {'template': 'help-applet.html'}),
+    (r'^mobile/', direct_to_template, {'template': 'help-android.html'}),
+    (r'^media/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.MEDIA_ROOT}),
     # Example:
     # (r'^website/', include('website.foo.urls')),
 
