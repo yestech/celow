@@ -7,42 +7,32 @@
  */
 package org.yestech.celow.applet;
 
-import org.yestech.celow.core.Game;
-import org.yestech.celow.core.IGame;
+import org.yestech.celow.core.*;
 
 import java.applet.Applet;
 import java.awt.*;
 
 import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
-import static org.yestech.celow.core.ICelowConstants.ABOUT_INFO;
 
 /**
  * This is the dice games celow.
  */
-public class Celow extends Applet implements Runnable {
+public class Celow extends Applet implements Runnable, IView {
 
     private static final String APPLET_VERSION = "Version 1.2";
-    public static final String APPLET_INFO = "Celow " + APPLET_VERSION + ", " + ABOUT_INFO;
+    public static final String APPLET_INFO = "Celow " + APPLET_VERSION + ", developed by YES Technology, copyright yestech.org 1999-2010";
 
     private Thread animator;
     private Button btRoll;
-    private Label lbWager;
-    //private Label lbBank;
     private String bank;
-    //private Label lbPoint;
     private String point;
     private TextField tfWager;
-    //private Label lbTitle;
     private String title;
-    private Label lbVersion;
 
     // BEGIN Progress Bar Shit
     private boolean imagesLoaded = false;
     private double imageCount;
-    private double imageTotal = 7;
-    private int dice;
-    private int back;
     private AMDProgressBarEmbed progress;
     boolean dieDone = false;
     boolean backDone = false;
@@ -54,17 +44,12 @@ public class Celow extends Applet implements Runnable {
     private Image dice1;
     private Image dice2;
     private Image dice3;
-    private Image background;
     private double backCount;
     // END GRAPHIC IMAGES
 
 
-    private Panel leftPanel;
-    private Panel southPanel;
-    private Panel buttonPanel;
     private Font bigFont;
     private Font midFont;
-    private Font smallFont;
 
     private IGame game;
     public static final String POINT_TITLE = "     ....... Point .......";
@@ -78,6 +63,8 @@ public class Celow extends Applet implements Runnable {
     public static final String WELCOME_TO_CELOW_TITLE = "..... Welcome To Celow .....";
     public static final String INVALID_WAGER_TITLE = ".... Wager must be greater than 0 ....";
     public static final String LOADING_IMAGES_TITLE = "Loading Images....";
+    private boolean invalidWager;
+    private int balance;
 
     //--------------------------------------------------------------------------
     //  A P P L E T   C O M P L I A N T   M E T H O D S 
@@ -149,15 +136,15 @@ public class Celow extends Applet implements Runnable {
         setLayout(new BorderLayout());
         bigFont = new Font("Helvetica", Font.PLAIN, 24);
         midFont = new Font("Helvetica", Font.PLAIN, 12);
-        smallFont = new Font("Helvetica", Font.PLAIN, 10);
+        Font smallFont = new Font("Helvetica", Font.PLAIN, 10);
         showStatus("Loading Celow..... Please wait......");
-        leftPanel = new Panel();
+        Panel leftPanel = new Panel();
         leftPanel.setLayout(new GridLayout(2, 2));
-        southPanel = new Panel();
-        buttonPanel = new Panel();
+        Panel southPanel = new Panel();
+        Panel buttonPanel = new Panel();
         buttonPanel.setLayout(new FlowLayout());
 
-        lbVersion = new Label(APPLET_VERSION);
+        Label lbVersion = new Label(APPLET_VERSION);
         lbVersion.setFont(smallFont);
 
         btRoll = new Button();
@@ -165,7 +152,7 @@ public class Celow extends Applet implements Runnable {
         btRoll.setBackground(Color.gray);
         btRoll.setLabel("ROLL");
 
-        lbWager = new Label("Wager:");
+        Label lbWager = new Label("Wager:");
         lbWager.setFont(midFont);
         tfWager = new TextField(10);
         tfWager.setFont(midFont);
@@ -200,21 +187,11 @@ public class Celow extends Applet implements Runnable {
         //
         backtrack = new MediaTracker(this);
         Image imback = getImage(getCodeBase(), "images/background.gif");
-        background = imback;
         backtrack.addImage(imback, 0);
         add("South", southPanel);
         game = new Game();
-//        addPlayer(PlayerTypeEnum.USER, "single user", "user");
-//        addPlayer(PlayerTypeEnum.COMPUTER, "computer", "computer");
+        game.setView(this);
     }
-
-//    private void addPlayer(PlayerTypeEnum type, String id, String screenName) {
-//        IPlayer player = new Player();
-//        player.setId(id);
-//        player.setScreenName(screenName);
-//        player.setType(type);
-////        game.addPlayer(player);
-//    }
 
     /**
      * @see java.applet.Applet#start()
@@ -245,7 +222,7 @@ public class Celow extends Applet implements Runnable {
                 } catch (InterruptedException e) {
                 }
                 for (int d = 0; d < diceImages.length; d++) {
-                    dice = tracker.statusID(d, true);
+                    int dice = tracker.statusID(d, true);
                     if (dice == MediaTracker.COMPLETE && !dieDone) {
                         ++imageCount;
                         ++tempDie;
@@ -254,7 +231,7 @@ public class Celow extends Applet implements Runnable {
                         }
                     }
                 }
-                back = backtrack.statusID(0, true);
+                int back = backtrack.statusID(0, true);
                 if (back == MediaTracker.COMPLETE && !backDone) {
                     ++imageCount;
                     backDone = true;
@@ -284,110 +261,26 @@ public class Celow extends Applet implements Runnable {
      *
      */
     final public boolean action(Event evt, Object arg) {
-//        if (evt.target == btRoll) {
-//            if (game.isAmountValid(tfWager.getText())) {
-////                IPlayer player = game.getCurrentPlayer();
-//                player.setWager(parseDouble(tfWager.getText()));
-//                game.rollDice();
-//                processRoll();
-//                return true;
-//            } else {
-//                title = INVALID_WAGER_TITLE;
-//            }
-//        }
+        if (evt.target == btRoll) {
+            invalidWager = false;
+            game.rollDice();
+            if (!invalidWager) {
+                return true;
+            }
+        }
         return false;
-    }
-
-    void processRoll() {
-//        IPlayer currentPlayer = game.getCurrentPlayer();
-//        boolean inEffect = game.isPointInEffect();
-////        IPlayer pointPlayer = game.getPointPlayer();
-//
-//        ResultsEnum result = currentPlayer.getResult();
-//        //make sure we are from 0..n-1
-//        dice1 = diceImages[(currentPlayer.getDice1() - 1)];
-//        dice2 = diceImages[(currentPlayer.getDice2() - 1)];
-//        dice3 = diceImages[(currentPlayer.getDice3() - 1)];
-//
-//        if (inEffect) {
-//            IPlayer pointPlayer = game.getPointPlayer();
-//            switch (result) {
-//                case LOSER:
-//                    title = COMPUTER_LOSER_TITLE;
-//                    setBank(pointPlayer);
-////                    hidePoint();
-//                    break;
-//                case WINNER:
-//                    title = COMPUTER_WINNER_TITLE;
-//                    setBank(pointPlayer);
-////                    hidePoint();
-//                    break;
-//                case POINT:
-//                    if (pointPlayer.getPoint() < currentPlayer.getPoint()) {
-//                        title = COMPUTER_WINNER_TITLE;
-//                        setBank(pointPlayer);
-//                        setPoint(currentPlayer);
-//                    } else if (currentPlayer.getPoint() == pointPlayer.getPoint()) {
-//                        title = PUSH_TITLE;
-//                        setBank(pointPlayer);
-//                        setPoint(currentPlayer);
-//                    } else if (pointPlayer.getPoint() > currentPlayer.getPoint()) {
-//                        title = COMPUTER_LOSER_TITLE;
-//                        setBank(pointPlayer);
-//                        setPoint(currentPlayer);
-//                    }
-//                    break;
-//                case NOTHING:
-//                    title = COMPUTER_NOTHING_TITLE;
-//                    break;
-//            }
-//            game.setInitialRoll(true);
-//        } else {
-//            switch (result) {
-//                case LOSER:
-//                    title = LOSER_TITLE;
-//                    setBank(currentPlayer);
-//                    hidePoint();
-//                    game.setInitialRoll(true);
-//                    break;
-//                case WINNER:
-//                    title = WINNER_TITLE;
-//                    setBank(currentPlayer);
-//                    hidePoint();
-//                    game.setInitialRoll(true);
-//                    break;
-//                case POINT:
-//                    title = POINT_TITLE;
-//                    setPoint(currentPlayer);
-//                    game.setInitialRoll(false);
-//                    break;
-//                case NOTHING:
-//                    title = NOTHING_TITLE;
-//                    hidePoint();
-//                    game.setInitialRoll(true);
-//                    break;
-//            }
-//        }
     }
 
     private void hidePoint() {
         point = "0";
     }
 
-//    private void setBank(IPlayer player) {
-//        bank = valueOf(player.getBalance());
-//    }
-//
-//    private void setPoint(IPlayer player) {
-//        point = valueOf(player.getPoint());
-//    }
-
     final public void update(Graphics g) {
-//        if (imagesLoaded) {
-        paint(g);
-//        } else {
-//            paint(g);
-//        }
+        if (imagesLoaded) {
+            paint(g);
+        } else {
+            paint(g);
+        }
     }
 
     /**
@@ -398,6 +291,7 @@ public class Celow extends Applet implements Runnable {
      */
     final public void paint(Graphics g) {
         if (imagesLoaded) {
+            //process game...
             showStatus(WELCOME_TO_CELOW_TITLE);
             if (++backCount < 2) {
                 g.setColor(Color.black);
@@ -419,13 +313,11 @@ public class Celow extends Applet implements Runnable {
             g.fillRect(0, 0, 150, getSize().height);
             g.setColor(Color.white);
             g.drawString("Bank:", 40, 150);
-//            IPlayer player = game.getCurrentPlayer();
-//            double balance = player.getBalance();
-//            if (balance > 0) {
-//                g.setColor(Color.green);
-//            } else if (balance < 0) {
-//                g.setColor(Color.red);
-//            }
+            if (balance > 0) {
+                g.setColor(Color.green);
+            } else if (balance < 0) {
+                g.setColor(Color.red);
+            }
             g.drawString(bank, 80, 150);
             g.setColor(Color.white);
             if (!"0".equals(point)) {
@@ -443,6 +335,7 @@ public class Celow extends Applet implements Runnable {
             progress.setBoxColors(new Color(11, 31, 223), new Color(125, 175, 251));
             progress.setBarColor(new Color(203, 143, 251));
             progress.setTextColors(Color.white, Color.black);
+            double imageTotal = 7;
             progress.setText(Math.round(((imageCount / imageTotal) * 100))
                     + " %");
             progress.setPercent(imageCount / imageTotal);
@@ -455,5 +348,61 @@ public class Celow extends Applet implements Runnable {
      */
     final public String getAppletInfo() {
         return APPLET_INFO;
+    }
+
+    @Override
+    public void update(IState state) {
+        title = caculateTitle(state.getResult());
+        balance = state.getTotal();
+        bank = state.getBank();
+        point = state.getPointAsString();
+        dice1 = diceImages[state.getDie(0) - 1];
+        dice2 = diceImages[state.getDie(1) - 1];
+        dice3 = diceImages[state.getDie(2) - 1];
+    }
+
+    private String caculateTitle(GameResultEnum result) {
+        String title = WELCOME_TO_CELOW_TITLE;
+        switch (result) {
+            case LOSER:
+                title = LOSER_TITLE;
+                break;
+            case WINNER:
+                title = WINNER_TITLE;
+                break;
+            case NOTHING:
+                title = NOTHING_TITLE;
+                break;
+            case POINT:
+                title = POINT_TITLE;
+                break;
+            case PUSH:
+                title = PUSH_TITLE;
+                break;
+            case COMPUTER_LOSER:
+                title = COMPUTER_LOSER_TITLE;
+                break;
+            case COMPUTER_WINNER:
+                title = COMPUTER_WINNER_TITLE;
+                break;
+            case COMPUTER_NOTHING:
+                title = COMPUTER_NOTHING_TITLE;
+                break;
+            case COMPUTER_POINT:
+                title = POINT_TITLE;
+                break;
+        }
+        return title;
+    }
+
+    @Override
+    public String getWagerAmount() {
+        return tfWager.getText();
+    }
+
+    @Override
+    public void showInvalidAmount() {
+        title = INVALID_WAGER_TITLE;
+        invalidWager = true;
     }
 }
