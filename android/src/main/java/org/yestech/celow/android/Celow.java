@@ -1,14 +1,16 @@
 package org.yestech.celow.android;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.EditText;
 import android.widget.TableRow;
 import android.widget.TextView;
-import org.yestech.celow.core.IGame;
 import org.yestech.celow.core.Game;
+import org.yestech.celow.core.IGame;
 import org.yestech.celow.core.IState;
 
 public class Celow extends Activity {
@@ -117,7 +119,7 @@ public class Celow extends Activity {
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.about_menu:
-                show(About.class);
+                showAbout();
                 return true;
             case R.id.help_menu:
                 show(Help.class);
@@ -128,6 +130,21 @@ public class Celow extends Activity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void showAbout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle(R.string.about_title)
+                .setIcon(R.drawable.about_icon)
+                .setMessage(R.string.about_text)
+                .setCancelable(true)
+                .setNeutralButton(R.string.close_button, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.cancel();
+                    }
+                });
+        AlertDialog aboutDialog = builder.create();
+        aboutDialog.show();
     }
 
     private void show(Class<?> activity) {

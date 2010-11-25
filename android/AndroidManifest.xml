@@ -20,11 +20,10 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".About" android:label="@string/about"
-                  android:theme="@android:style/Theme.NoTitleBar"/>
         <activity android:name=".Help" android:label="@string/help"
                 android:theme="@android:style/Theme.NoTitleBar"/>
     </application>
     <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-sdk android:minSdkVersion="8"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-sdk android:minSdkVersion="7"/>
 </manifest> 
