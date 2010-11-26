@@ -18,7 +18,7 @@ public class StateDao {
     private final static String TAG = "StateDao";
 
     private static final String FILENAME_NAME = "gameState.db";
-    private static final String DIR_ROOT = "/YESTech.org/celow/";
+    private static final String DIR_ROOT = "/yestech.org/celow/";
     
     private Context context;
 
