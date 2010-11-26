@@ -21,17 +21,20 @@ public class Celow extends Activity {
     private AndroidView androidGameView;
     private boolean running = false;
     private StateDao stateDao;
+    private AccelerometerManager accelerometerManager;
+    private GameProcessor gameProcessor;
 
     @Override
     protected void onPause() {
+        super.onPause();
         //save state
         stateDao.save(game.getState());
         running = false;
-        super.onPause();
     }
 
     @Override
     protected void onResume() {
+        super.onResume();
         if (!running && stateDao != null) {
             //reload state
             IState state = stateDao.load();
@@ -40,14 +43,19 @@ public class Celow extends Activity {
             }
             running = true;
         }
-        super.onResume();
+        if (accelerometerManager.isSupported()) {
+            accelerometerManager.startListening(gameProcessor);
+        }
     }
 
     @Override
     protected void onDestroy() {
-        running = false;        
-        stateDao.save(game.getState());
         super.onDestroy();
+        running = false;
+        stateDao.save(game.getState());
+        if (accelerometerManager.isListening()) {
+            accelerometerManager.stopListening();
+        }
     }
 
     /**
@@ -60,7 +68,9 @@ public class Celow extends Activity {
         androidGameView = new AndroidView(this);
         game = new Game();
         game.setView(androidGameView);
-        gestureDetector = new GestureDetector(new ProcessSwipeGesture(game));
+        gameProcessor = new GameProcessor(game);
+        gestureDetector = new GestureDetector(gameProcessor);
+        accelerometerManager = new AccelerometerManager(this);
         //need to add to parent first for hierarchy
         setContentView(R.layout.celow);
         initalize();

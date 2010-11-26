@@ -1,11 +1,9 @@
 package org.yestech.celow.android;
 
-import android.util.Log;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import org.yestech.celow.core.IGame;
 
-import static java.lang.Math.abs;
 import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
@@ -13,12 +11,12 @@ import static java.lang.Math.sqrt;
  *
  *
  */
-public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener {
-    private final static String TAG = "ProcessSwipeGesture";
+public class GameProcessor extends GestureDetector.SimpleOnGestureListener implements AccelerometerListener {
+    private final static String TAG = "GameProcessor";
     private IGame game;
     private static final double MIN_DISTANCE = 10;
 
-    public ProcessSwipeGesture(IGame game) {
+    public GameProcessor(IGame game) {
         this.game = game;
     }
 
@@ -39,5 +37,14 @@ public class ProcessSwipeGesture extends GestureDetector.SimpleOnGestureListener
         double x = pow(x2 - x1, 2);
         double y = pow(y2 - y1, 2);
         return sqrt(x + y);
+    }
+
+    @Override
+    public void onAccelerationChanged(float x, float y, float z) {
+    }
+
+    @Override
+    public void onShake(float force) {
+        game.rollDice();
     }
 }
