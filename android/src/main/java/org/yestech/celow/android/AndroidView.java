@@ -183,35 +183,45 @@ public class AndroidView implements IView {
 
     protected int getTitle(GameResultEnum result) {
         int title = R.string.default_status_text;
-        switch (result) {
-            case LOSER:
-                title = R.string.loser_status_text;
-                break;
-            case WINNER:
-                title = R.string.winner_status_text;
-                break;
-            case NOTHING:
-                title = R.string.nothing_status_text;
-                break;
-            case POINT:
-                title = R.string.point_status_text;
-                break;
-            case PUSH:
-                title = R.string.push_status_text;
-                break;
-            case COMPUTER_LOSER:
-                title = R.string.computer_loser_status_text;
-                break;
-            case COMPUTER_WINNER:
-                title = R.string.computer_winner_status_text;
-                break;
-            case COMPUTER_NOTHING:
-                title = R.string.computer_nothing_status_text;
-                break;
-            case COMPUTER_POINT:
-                title = R.string.point_status_text;
-                break;
+        if (result != null) {
+            switch (result) {
+                case LOSER:
+                    title = R.string.loser_status_text;
+                    break;
+                case WINNER:
+                    title = R.string.winner_status_text;
+                    break;
+                case NOTHING:
+                    title = R.string.nothing_status_text;
+                    break;
+                case POINT:
+                    title = R.string.point_status_text;
+                    break;
+                case PUSH:
+                    title = R.string.push_status_text;
+                    break;
+                case COMPUTER_LOSER:
+                    title = R.string.computer_loser_status_text;
+                    break;
+                case COMPUTER_WINNER:
+                    title = R.string.computer_winner_status_text;
+                    break;
+                case COMPUTER_NOTHING:
+                    title = R.string.computer_nothing_status_text;
+                    break;
+                case COMPUTER_POINT:
+                    title = R.string.point_status_text;
+                    break;
+            }
         }
+
         return title;
+    }
+
+    @Override
+    public void reset() {
+        wagerValue.setText("0");
+        bankValue.setTextColor(resources.getColor(R.color.even_balance));
+        setBankValue("0");
     }
 }

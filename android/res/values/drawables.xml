@@ -4,4 +4,5 @@
     <drawable name="quit_menu">@drawable/stop</drawable>
     <drawable name="about_menu">@drawable/cloud</drawable>
     <drawable name="help_menu">@drawable/light</drawable>
+    <drawable name="new_game_menu">@drawable/dice</drawable>
 </resources>

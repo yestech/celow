@@ -17,9 +17,17 @@ public class State implements IState {
     private GameResultEnum result;
     private static final long serialVersionUID = -1155542650736376361L;
 
+    public State() {
+        dice = new ArrayList<Integer>(3);
+        dice.add(0);
+        dice.add(0);
+        dice.add(0);
+        result = GameResultEnum.INITIALIZE;
+    }
+
     @Override
     public void setDie(int die, int value) {
-        dice.add(die, value);
+        dice.set(die, value);
     }
 
     @Override

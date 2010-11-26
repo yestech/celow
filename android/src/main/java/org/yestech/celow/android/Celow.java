@@ -45,8 +45,9 @@ public class Celow extends Activity {
 
     @Override
     protected void onDestroy() {
-//        stateDao.delete();
-        super.onStop();
+        running = false;        
+        stateDao.save(game.getState());
+        super.onDestroy();
     }
 
     /**
@@ -64,7 +65,6 @@ public class Celow extends Activity {
         setContentView(R.layout.celow);
         initalize();
         androidGameView.hidePoint();
-        running = true;
     }
 
     private void initalize() {
@@ -124,12 +124,34 @@ public class Celow extends Activity {
             case R.id.help_menu:
                 show(Help.class);
                 return true;
+            case R.id.new_game_menu:
+                newGame();
+                return true;
             case R.id.quit_menu:
                 quit();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    private void newGame() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage(R.string.new_game_text)
+                .setCancelable(true)
+                .setPositiveButton(R.string.create_button, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        game.reset();
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton(R.string.cancel_button, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+        AlertDialog aboutDialog = builder.create();
+        aboutDialog.show();
     }
 
     private void showAbout() {
@@ -140,7 +162,7 @@ public class Celow extends Activity {
                 .setCancelable(true)
                 .setNeutralButton(R.string.close_button, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        dialog.cancel();
+                        dialog.dismiss();
                     }
                 });
         AlertDialog aboutDialog = builder.create();
@@ -153,7 +175,6 @@ public class Celow extends Activity {
     }
 
     private void quit() {
-        stateDao.delete();
         finish();
     }
 }

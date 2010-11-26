@@ -23,6 +23,13 @@ public class Game implements IGame {
     }
 
     @Override
+    public void reset() {
+        state = new State();
+        apply(state);
+        view.reset();
+    }
+
+    @Override
     public IState getState() {
         return state;
     }

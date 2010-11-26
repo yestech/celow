@@ -26,6 +26,8 @@
     <string name="copyright_label">Copyright</string>
     <string name="help_url">http://celow.com/help/mobile/</string>
     <string name="close_button">Close</string>
+    <string name="create_button">Yes</string>
+    <string name="cancel_button">No</string>
     <string name="about">About</string>
     <string name="about_title">Celow</string>
     <string name="about_text">
@@ -33,4 +35,6 @@
         Team\nArtie Copeland\n\n
         \u00A9 YES Technology 2010\nhttp://yestech.org
     </string>
+    <string name="new_game">New Game</string>
+    <string name="new_game_text">State a new game?</string>
 </resources>

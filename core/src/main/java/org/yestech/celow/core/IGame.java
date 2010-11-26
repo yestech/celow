@@ -29,4 +29,6 @@ public interface IGame {
     void setView(IView view);
 
     void apply(IState state);
+
+    void reset();
 }

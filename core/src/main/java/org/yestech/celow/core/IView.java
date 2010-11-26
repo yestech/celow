@@ -10,4 +10,6 @@ public interface IView {
     String getWagerAmount();
 
     void showInvalidAmount();
+
+    void reset();
 }

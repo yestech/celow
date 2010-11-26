@@ -405,4 +405,8 @@ public class Celow extends Applet implements Runnable, IView {
         title = INVALID_WAGER_TITLE;
         invalidWager = true;
     }
+
+    @Override
+    public void reset() {
+    }
 }
