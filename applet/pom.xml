@@ -14,6 +14,38 @@
     <name>Celow Applet</name>
     <url>http://celow.com</url>
     <packaging>jar</packaging>
+    <description>Applet app for celow</description>
+    <scm>
+        <connection>scm:git:git@github.com:yestech/celow.git</connection>
+        <developerConnection>scm:git:git@github.com:yestech/celow.git</developerConnection>
+        <url>http://github.com/yestech/celow/tree/master</url>
+    </scm>
+    <organization>
+        <name>YES Technology Association</name>
+        <url>http://yestech.org</url>
+    </organization>
+    <licenses>
+        <license>
+            <name>LGPLv3</name>
+            <url>http://opensource.org/licenses/lgpl-3.0.html</url>
+            <distribution>repo</distribution>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>artie</id>
+            <name>Artie Copeland</name>
+            <email>http://mailhide.recaptcha.net/d?k=013dif-8KmF_OR5-Zs49rn9w==&amp;c=ZDwNN9ZwWomHpMAaLEW0Rt3HB4aATO6AM20eeZNxLS4=</email>
+            <roles>
+                <role>architect</role>
+                <role>developer</role>
+            </roles>
+        </developer>
+    </developers>
+    <ciManagement>
+        <url>http://ci.yestech.org</url>
+        <system>hudson</system>
+    </ciManagement>
     <dependencies>
         <dependency>
             <groupId>org.yestech.celow</groupId>
